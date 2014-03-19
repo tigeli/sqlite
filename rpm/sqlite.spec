@@ -9,6 +9,7 @@ Source0:    %{name}-%{version}.tar.gz
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 BuildRequires:  readline-devel
+BuildRequires:  libicu-devel
 
 %description
 SQLite is a C library that implements an SQL database engine. A large
@@ -33,7 +34,8 @@ to install %{name}-devel.
 %setup -q -n %{name}-%{version}/%{name}
 
 %build
-export CFLAGS="$RPM_OPT_FLAGS -DSQLITE_ENABLE_COLUMN_METADATA=1 -DSQLITE_DISABLE_DIRSYNC=1 -DYYSTACKDEPTH=500 -Wall -DSQLITE_SECURE_DELETE -DSQLITE_ENABLE_FTS3 -DSQLITE_ENABLE_RTREE=1 -DSQLITE_SOUNDEX=1 -DNDEBUG -D_XOPEN_SOURCE=500 -DUSE_PREAD -DSQLITE_ENABLE_UNLOCK_NOTIFY=1 -DSQLITE_OMIT_LOOKASIDE=1"
+export CFLAGS="$RPM_OPT_FLAGS -DSQLITE_ENABLE_COLUMN_METADATA=1 -DSQLITE_DISABLE_DIRSYNC=1 -DYYSTACKDEPTH=500 -Wall -DSQLITE_SECURE_DELETE -DSQLITE_ENABLE_FTS3 -DSQLITE_ENABLE_RTREE=1 -DSQLITE_SOUNDEX=1 -DNDEBUG -D_XOPEN_SOURCE=500 -DUSE_PREAD -DSQLITE_ENABLE_UNLOCK_NOTIFY=1 -DSQLITE_OMIT_LOOKASIDE=1 -DSQLITE_ENABLE_ICU"
+export LDFLAGS="`icu-config --ldflags-libsonly`"
 
 %reconfigure --disable-static \
     --without-tcl \
