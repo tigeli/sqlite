@@ -9,7 +9,7 @@ Source0:    %{name}-%{version}.tar.gz
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 BuildRequires:  readline-devel
-BuildRequires:  libicu-devel
+BuildRequires:  pkgconfig(icu-i18n)
 
 %description
 SQLite is a C library that implements an SQL database engine. A large
